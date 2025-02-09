@@ -1,0 +1,33 @@
+version: "1.0"
+services:
+  sso-consumer1-be:
+    build:
+      context: .
+    image: sso_consumer1_be_img
+    container_name: sso_consumer1_be_ct
+    env_file:
+      - .env.consumer1
+    ports:
+      - 4001:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - my_network
+
+  sso-consumer2-be:
+    build:
+      context: .
+    image: sso_consumer2_be_img
+    container_name: sso_consumer2_be_ct
+    env_file:
+      - .env.consumer2
+    ports:
+      - 5001:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    name: my_network
